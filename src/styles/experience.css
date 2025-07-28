@@ -1,0 +1,20 @@
+.ExpInfo{
+    background-color: white;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5%;
+    line-height: .4rem;
+}
+.ExpInfoEdit{
+    background-color: white;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 5%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 10%;
+    
+}
