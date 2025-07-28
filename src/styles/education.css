@@ -1,4 +1,4 @@
-.BasicInfo{
+.EduInfo{
     background-color: white;
     border-radius: 10px;
     padding: 2%;
@@ -8,7 +8,7 @@
     gap: 5%;
     line-height: .4rem;
 }
-.BasicInfoEdit{
+.EduInfoEdit{
     background-color: white;
     border-radius: 10px;
     padding: 2%;
