@@ -1,11 +1,14 @@
 import '../styles/experience.css'
 import { useState } from 'react'
 
-export default function Education({id, data, onExpChange}){
-    const [editing, setEditing] = useState(false);
+export default function Education({id, data, onExpChange, rmvExp}){
+    const [editing, setEditing] = useState(true);
 
     const toggleEdit = () => {
         editing ? setEditing(false) : setEditing(true);
+    }
+    const handleRmv = () => {
+        rmvExp(id);
     }
    
 
@@ -22,6 +25,7 @@ export default function Education({id, data, onExpChange}){
             <p>Company Description: {data.info}</p>
             <p>Actions: {actionList}</p>
             <button onClick={toggleEdit} >Edit</button>
+            <button onClick={handleRmv} >Remove</button>
         </div>
         )
     }

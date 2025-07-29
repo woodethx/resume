@@ -2,7 +2,7 @@ import '../styles/basicInfo.css'
 import { useState } from 'react'
 
 export default function BasicInfo({data, onBasicChange}){
-    const [editing, setEditing] = useState(false);
+    const [editing, setEditing] = useState(true);
 
     const toggleEdit = () => {
         editing ? setEditing(false) : setEditing(true);

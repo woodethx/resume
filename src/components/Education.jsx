@@ -1,11 +1,15 @@
 import '../styles/education.css'
 import { useState } from 'react'
 
-export default function Education({id, data, onEduChange}){
-    const [editing, setEditing] = useState(false);
+export default function Education({id, data, onEduChange, rmvEdu}){
+    const [editing, setEditing] = useState(true);
 
     const toggleEdit = () => {
         editing ? setEditing(false) : setEditing(true);
+    }
+
+    const handleRmv = () => {
+        rmvEdu(id);
     }
    
 
@@ -18,6 +22,7 @@ export default function Education({id, data, onEduChange}){
             <p>Graduation Date: {data.grad}</p>
             <p>GPA: {data.gpa}</p>
             <button onClick={toggleEdit} >Edit</button>
+            <button onClick={handleRmv} >Remove</button>
         </div>
         )
     }

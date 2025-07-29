@@ -7,28 +7,12 @@ import Experience from './components/Experience';
 function App() {
   const [count, setCount] = useState(0);
   const [basic, setBasic] = useState({
-    name: "Ethan", 
-    location: "College Station, TX", 
-    phone: "(979) 571-6202", 
-    email: "woodethx@gmail.com"});
-  const [edu, setEdu] = useState([{
-    id: crypto.randomUUID(), 
-    school: "Texas A&M University", 
-    location: "College Station, TX", 
-    major: "Technology Management", 
-    grad: "December 2024", 
-    gpa: "3.2/4.0"}])
-    const [exp, setExp] = useState([{
-    id: crypto.randomUUID(), 
-    company: "Texas A&M AgriLife IT", 
-    location: "College Station, TX", 
-    position: "Student Intern, Techbuy", 
-    duration: "August 2024 – December 2024", 
-    info: "Techbuy is a team under AgriLife IT that is responsible for providing and maintaining computers, software, and accessories to all AgriLife employees",
-    actions: [{id: crypto.randomUUID(), value: "Create detailed documentation for surplus asset processing, leading to more consistent and compliant procedures."},
-      {id: crypto.randomUUID(), value: "Transition asset tracking from Excel to a more collaborative platform, significantly improving accessibility and collaboration."},
-      {id: crypto.randomUUID(), value: "Assist in automating data cross-referencing processes with FAMIS, enhancing accuracy and reducing manual input errors."}
-    ]}])
+    name: "", 
+    location: "", 
+    phone: "", 
+    email: ""});
+  const [edu, setEdu] = useState([]);
+    const [exp, setExp] = useState([])
   
   function handleBasic(updated){
     setBasic(updated);
@@ -43,6 +27,16 @@ function App() {
     const newList = exp.map(item => {
           return item.id === idU ? updated : item
         })
+    setExp(newList);
+  }
+  function removeEdu(idR){
+    const newList = edu.filter((item) => item.id != idR);
+    console.log(newList);
+    setEdu(newList);
+  }
+  function removeExp(idR){
+    const newList = exp.filter((item) => item.id != idR);
+    console.log(newList);
     setExp(newList);
   }
   function addEdu(){
@@ -70,10 +64,10 @@ function App() {
     
   
   const allEdu = edu.map((d) => {
-    return (<Education key={d.id} id={d.id} data={d} onEduChange={handleEdu}/>);
+    return (<Education key={d.id} id={d.id} data={d} onEduChange={handleEdu} rmvEdu={removeEdu}/>);
   });
   const allExp = exp.map((d) => {
-    return (<Experience key={d.id} id={d.id} data={d} onExpChange={handleExp}/>);
+    return (<Experience key={d.id} id={d.id} data={d} onExpChange={handleExp} rmvExp={removeExp}/>);
   });
 
   const dispExp = exp.map((d) => {
@@ -108,9 +102,12 @@ function App() {
   return (
     <>
       <aside>
+        <h2>Basic Information: </h2>
         <BasicInfo data={basic} onBasicChange={handleBasic}/>
+        <h2>Education: </h2>
         {allEdu}
         <button onClick={addEdu}>+ Add Education</button>
+        <h2>Experience: </h2>
         {allExp}
         <button onClick={addExp}>+ Add Experience</button>
       </aside>
