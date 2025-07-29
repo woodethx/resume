@@ -25,9 +25,9 @@ function App() {
     position: "Student Intern, Techbuy", 
     duration: "August 2024 – December 2024", 
     info: "Techbuy is a team under AgriLife IT that is responsible for providing and maintaining computers, software, and accessories to all AgriLife employees",
-    actions: ["Create detailed documentation for surplus asset processing, leading to more consistent and compliant procedures.",
-      "Transition asset tracking from Excel to a more collaborative platform, significantly improving accessibility and collaboration.",
-      "Assist in automating data cross-referencing processes with FAMIS, enhancing accuracy and reducing manual input errors."
+    actions: [{id: crypto.randomUUID(), value: "Create detailed documentation for surplus asset processing, leading to more consistent and compliant procedures."},
+      {id: crypto.randomUUID(), value: "Transition asset tracking from Excel to a more collaborative platform, significantly improving accessibility and collaboration."},
+      {id: crypto.randomUUID(), value: "Assist in automating data cross-referencing processes with FAMIS, enhancing accuracy and reducing manual input errors."}
     ]}])
   
   function handleBasic(updated){
@@ -56,6 +56,19 @@ function App() {
               gpa: ""}]
     setEdu(newArr);
   }
+  function addExp(){
+    const newArr = [...exp, {id: crypto.randomUUID(), 
+    company: "", 
+    location: "", 
+    position: "", 
+    duration: "", 
+    info: "",
+    actions: [{id: crypto.randomUUID(), value: ""}
+    ]}]
+    setExp(newArr);
+  }
+    
+  
   const allEdu = edu.map((d) => {
     return (<Education key={d.id} id={d.id} data={d} onEduChange={handleEdu}/>);
   });
@@ -65,14 +78,16 @@ function App() {
 
   const dispExp = exp.map((d) => {
     const actionList = d.actions.map((action) => {
-      return (<li>{action}</li>)
+      return (<li>{action.value}</li>)
     });
     return(
       <div className="expBlock">
+        <div className="expTop">
         <b>{d.company}</b>
-        <p>{d.location}</p>
+        <p style={{marginLeft: "auto"}}>{d.location}</p>
         <i>{d.position}</i>
-        <p>{d.duration}</p>
+        <p style={{marginLeft: "auto"}}>{d.duration}</p>
+        </div>
         <p>{d.info}</p>
         {actionList}
       </div>
@@ -82,9 +97,9 @@ function App() {
   const dispEdu = edu.map((d) => {
     return (<div className="eduBlock">
     <b>{d.school}</b>
-    <p>{d.location}</p>
+    <p style={{marginLeft: "auto"}}>{d.location}</p>
     <i>{d.major}</i>
-    <p>{d.grad}</p>
+    <p style={{marginLeft: "auto"}}>{d.grad}</p>
     <p>{d.gpa}</p>
     </div>
     );
@@ -95,13 +110,16 @@ function App() {
       <aside>
         <BasicInfo data={basic} onBasicChange={handleBasic}/>
         {allEdu}
-        {allExp}
         <button onClick={addEdu}>+ Add Education</button>
+        {allExp}
+        <button onClick={addExp}>+ Add Experience</button>
       </aside>
       <main>
         <div className="page">
+          <div className="top">
           <h1>{basic.name}</h1>
           <p>{basic.location}    |    {basic.phone}    |    {basic.email}</p>
+          </div>
           <h2>Education</h2>
           <hr></hr>
           {dispEdu}

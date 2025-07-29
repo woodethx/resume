@@ -11,7 +11,7 @@ export default function Education({id, data, onExpChange}){
 
     if(!editing){
         const actionList = data.actions.map((action) => {
-      return (<li>{action}</li>)
+      return (<li>{action.value}</li>)
     });
         return (
         <div className="ExpInfo">  
@@ -25,14 +25,35 @@ export default function Education({id, data, onExpChange}){
         </div>
         )
     }
+    function editAction(idU, updated){
+    const newList = data.actions.map(item => {
+          if(item.id == idU){
+            return {
+                id: item.id,
+                value: updated
+            }
+          }
+          else{
+            return {
+                id: item.id,
+                value: item.value
+            }
+          }
+        })
+    onExpChange(id, {...data, actions: newList});
+  }
     if(editing){
         const actionList = data.actions.map((action) => {
       return (<><label>Action</label>
         <input type="text" 
-        value={action}/>
+        value={action.value}
+        onChange={(e) => editAction(action.id, e.target.value)}/>
         </>
       )
     });
+        const addAction = () => {
+            onExpChange(id, {...data, actions: [...data.actions,{id: crypto.randomUUID, value: ""}]});
+        }
         return(
         <div className="ExpInfoEdit">  
             <label htmlFor="company">Company</label>
@@ -55,6 +76,8 @@ export default function Education({id, data, onExpChange}){
             <input id="info" type="textarea" 
             value={data.info}
             onChange={(e) => onExpChange(id, {...data, info: e.target.value})}/>
+            {actionList}
+            <button onClick={addAction} >+ Add Action</button>
             <button onClick={toggleEdit} >Finish</button>
         </div>
     )
